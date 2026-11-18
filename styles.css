@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Onest:wght@400;500;600;700;800&display=swap');
 :root{--bg:#f4f6f8;--ink:#111d30;--muted:#647184;--line:#dce2e8;--blue:#2463eb;--navy:#101a2b;--white:#fff;--mint:#b8f0d4;--serif:Georgia,serif}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--bg);color:var(--ink);font-family:Manrope,Arial,sans-serif;font-size:15px;line-height:1.7}a{color:inherit;text-decoration:none}.section-wrap{width:min(1120px,calc(100% - 64px));margin-inline:auto}
@@ -15,3 +16,76 @@
 @media(max-width:800px){.section-wrap{width:min(100% - 40px,620px)}.topbar{height:66px;padding-inline:20px}nav{gap:14px}nav a{font-size:10px}.nav-cta{font-size:10px;padding:7px 10px}.hero{grid-template-columns:1fr .7fr;min-height:560px;padding-block:55px}.portrait-frame{height:300px;width:85%}.hero-visual{min-height:360px}.hero-meta{flex-wrap:wrap}.about-grid,.education{gap:40px}.metrics>div{padding-inline:16px}.metrics strong{font-size:29px}.contact-inner{gap:40px}}
 @media(max-width:600px){body{font-size:14px}.section-wrap{width:calc(100% - 36px)}.topbar{padding-inline:18px}.topbar nav{display:none}.nav-cta{margin-left:auto}.hero{display:flex;flex-direction:column-reverse;align-items:stretch;padding-block:30px 55px;gap:28px}.hero-visual{min-height:260px;justify-content:flex-start;padding-left:12%}.portrait-frame{height:245px;width:205px}.portrait-caption{bottom:0;left:50%;transform:translateX(-50%)}.visual-index{right:12%;top:15px}.hero-orbit{right:-360px;top:-50px}.hero-copy h1{font-size:58px;letter-spacing:-4px;margin:20px 0}.hero-role{font-size:15px}.hero-intro{font-size:13px}.hero-actions{flex-wrap:wrap}.button{padding:12px 14px;gap:15px}.hero-meta{font-size:10px;margin-top:25px}.metrics{grid-template-columns:repeat(2,1fr);row-gap:24px;margin-bottom:65px;padding:24px 0}.metrics>div{padding-inline:14px;border-right:0}.metrics>div:nth-child(odd){padding-left:0;border-right:1px solid var(--line)}.metrics>div:nth-child(even){padding-left:20px}.metrics strong{font-size:30px}.content-section{padding-bottom:70px}.section-heading{margin-bottom:35px}.section-heading h2{font-size:42px;letter-spacing:-2px}.about-grid,.contact-inner,.education{grid-template-columns:1fr;gap:25px}.about-lead{font-size:22px}.projects-section,.experience-section{padding:70px 0}.project-card{grid-template-columns:32px 1fr;gap:12px;padding:28px 0}.project-card h3{font-size:24px}.project-results{gap:18px}.project-results b{font-size:20px}.project-results small{font-size:9px}.project-footnote{margin-left:44px}.skills-grid{grid-template-columns:1fr}.skill-card{min-height:0;padding:22px}.timeline-item{grid-template-columns:1fr;gap:8px;padding:22px 0}.timeline-date{padding:0}.education{margin-top:60px;padding-top:30px}.education-list>div{grid-template-columns:90px 1fr;gap:12px}.contact-section{padding:70px 0}.contact-inner h2{font-size:44px}.contact-links>a,.phone-details summary{font-size:10px}.contact-links>a b,.phone-details summary b{font-size:10px}.phone-numbers{flex-direction:column;gap:8px}.download-band{padding-block:45px;align-items:flex-start;gap:25px;flex-direction:column}.download-band h2{font-size:28px}.footer{flex-wrap:wrap;gap:14px}.footer span{flex:1}.footer>a:last-of-type{margin-left:0}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+/*
+  Portrait layout correction for egorover.github.io
+  Append this block to the END of the existing styles.css.
+  Do not replace the existing stylesheet with this patch.
+*/
+
+/* Keep the portrait upright and make its frame the alignment reference. */
+.hero-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.portrait-frame {
+  position: relative;
+  transform: none !important;
+  rotate: none !important;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: none;
+  margin-inline: auto;
+}
+
+.portrait-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  border-radius: 22px;
+  transform: none !important;
+  rotate: none !important;
+}
+
+/* Caption is centered on the same visual axis as the centered portrait. */
+.portrait-caption {
+  position: absolute;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: max-content;
+  max-width: calc(100% - 12px);
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* Mobile: remove the old left offset so portrait and caption share a center. */
+@media (max-width: 600px) {
+  .hero-visual {
+    width: 100%;
+    min-height: 285px;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0;
+  }
+
+  .portrait-frame {
+    width: 205px;
+    height: 245px;
+    margin-inline: auto;
+  }
+
+  .portrait-caption {
+    left: 50%;
+    right: auto;
+    bottom: 0;
+    transform: translateX(-50%);
+  }
+}
